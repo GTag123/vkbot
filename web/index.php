@@ -31,7 +31,7 @@ $app->post('/bot', function() use($app) {
       break;
     
     case 'message_new':
-
+      echo $data->object->from_id;
       $request_params = array(
         'user_id' -> $data->object->from_id,
         'message'=>'Тест',

@@ -27,7 +27,7 @@ $app->post('/bot', function() use($app) {
 
   switch($data->type){
     case 'confirmation':
-      return getenv('VK_SECRET_TOKEN');
+      return getenv('VK_CONFIRMATION_CODE');
       break;
     
     case 'message_new':

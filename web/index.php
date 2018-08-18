@@ -36,7 +36,7 @@ $app->post('/bot', function() use($app) {
         'user_id'=> '239188570',
         'message'=>'Тест',
         'access_token' -> getenv('VK_TOKEN'),
-        'v'=> '5.69'
+        'v'=> '5.80'
       );
 
       file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));

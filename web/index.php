@@ -39,7 +39,7 @@ $app->post('/bot', function() use($app) {
         'v'=> '5.80'
       );
 
-      file_get_contents('http://api.vk.com/method/messages.send?' . http_build_query($request_params));
+      file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
       return 'ok';
 
       break;

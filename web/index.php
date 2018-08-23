@@ -33,7 +33,8 @@ $app->post('/bot', function() use($app) {
     case 'message_new':
       if ( $data->object->text == 'Ку' || $data->object->text == 'ку' ){
         $request_params = array(
-          'user_id' => "{$data->object->from_id}",
+          'chat_id' => "{$data->object->chat_id}",
+          // 'user_id' => "{$data->object->from_id}",
           'message'=>'Привет',
           'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
           'v' => '5.80'

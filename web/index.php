@@ -87,7 +87,7 @@ $app->post('/bot', function() use($app) {
         $request_params = array(
           'peer_id' => "{$data->object->peer_id}",
           'message'=> $rand,
-          'attachment' => 'photo-170236279_256195520',
+          'attachment' => 'photo-170236279_456239020',
           'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
           'v' => '5.80'
         );

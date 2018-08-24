@@ -1,4 +1,5 @@
 <?php
+use FormulaParser\FormulaParser;
 require('../vendor/autoload.php');
 $anekdots = array(
   'Колобок повесился😄😄',
@@ -56,7 +57,7 @@ $app->post('/bot', function() use($app) {
       if ( $split[0] == '!Ку' || $split[0] == '!ку' || $split[0] == '!привет' || $split[0] == '!Привет'){
         $request_params = array(
           'user_id' => "{$data->object->from_id}",
-          'message'=>'привет',
+          'message'=>'🎉Приветик🎉',
           'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
           'v' => '5.80'
         );
@@ -67,16 +68,25 @@ $app->post('/bot', function() use($app) {
           'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
           'v' => '5.80'
         );
+      } elseif ( $split[0] == '!реши' ){
+            $request_params = array(
+              'user_id' => "{$data->object->from_id}",
+              'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
+              'v' => '5.80'
+            );
+            $formula = $split[1];
+            $precision = 2; // Number of digits after the decimal point
+
+            try {
+              $parser = new FormulaParser($formula, $precision);
+              $result = $parser->getResult(); // [0 => 'done', 1 => 16.38]
+              $request_params['message'] = "🍀Ответ: " . $result[1];
+            } catch (\Exception $e) {
+              $request_params['message'] = "😱Тут я бессилен😱";
+            }
+
       }
-      /*elseif ( $data->object->text == '!анекдот' || $data->object->text == '!Анекдот' ){
-        $rand = $anekdots[rand(0, count($anekdots)-1)];
-        $request_params = array(
-          'user_id' => "{$data->object->from_id}",
-          'message'=> "$anekdots[0]",
-          'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
-          'v' => '5.80'
-        );
-      } */else {
+      else {
         $request_params = array(
           'user_id' => "{$data->object->from_id}",
           'message'=>'Добро пожаловать! <br> Вот мои команды: <br> ;-P !привет - бот скажет тебе привет😜<br>👏!скажи <фраза/текст> - бот повторит твою фразу👏<br>😎!реши <пример> - бот вычислит пример за тебя😎',
@@ -94,3 +104,12 @@ $app->post('/bot', function() use($app) {
 });
 
 $app->run();
+/*elseif ( $data->object->text == '!анекдот' || $data->object->text == '!Анекдот' ){
+        $rand = $anekdots[rand(0, count($anekdots)-1)];
+        $request_params = array(
+          'user_id' => "{$data->object->from_id}",
+          'message'=> "$anekdots[0]",
+          'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
+          'v' => '5.80'
+        );
+      } */

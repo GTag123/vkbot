@@ -53,14 +53,14 @@ $app->post('/bot', function() use($app) {
 
     case 'message_new':
       $split = explode(" ", $data->object->text, 2);
-      if ( $data->object->text == '!Ку' || $data->object->text == '!ку' || $data->object->text == '!привет' || $data->object->text == '!Привет'){
+      if ( $split[0] == '!Ку' || $split[0] == '!ку' || $split[0] == '!привет' || $split[0] == '!Привет'){
         $request_params = array(
           'user_id' => "{$data->object->from_id}",
           'message'=>'привет',
           'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
           'v' => '5.80'
         );
-      } elseif ( $split[0] == "!реши" ){
+      } elseif ( $split[0] == "!скажи" ){
         $request_params = array(
           'user_id' => "{$data->object->from_id}",
           'message'=> $split[1],
@@ -79,7 +79,7 @@ $app->post('/bot', function() use($app) {
       } */else {
         $request_params = array(
           'user_id' => "{$data->object->from_id}",
-          'message'=>'Добро пожаловать! <br> Вот мои команды: <br> ;-P !привет - бот скажет тебе привет😜',
+          'message'=>'Добро пожаловать! <br> Вот мои команды: <br> ;-P !привет - бот скажет тебе привет😜<br>👏!скажи <фраза/текст> - бот повторит твою фразу👏<br>😎!реши <пример> - бот вычислит пример за тебя😎',
           'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
           'v' => '5.80'
         );

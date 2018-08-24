@@ -34,21 +34,21 @@ $app->post('/bot', function() use($app) {
       $split = explode(" ", $data->object->text, 2);
       if ( $split[0] == '!Ку' || $split[0] == '!ку' || $split[0] == '!привет' || $split[0] == '!Привет'){
         $request_params = array(
-          'user_id' => "{$data->object->from_id}",
+          'peer_id' => "{$data->object->peer_id}",
           'message'=>'🎉Приветик🎉',
           'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
           'v' => '5.80'
         );
       } elseif ( $split[0] == "!скажи" ){
         $request_params = array(
-          'user_id' => "{$data->object->from_id}",
+          'peer_id' => "{$data->object->peer_id}",
           'message'=> $split[1],
           'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
           'v' => '5.80'
         );
       } elseif ( $split[0] == '!реши' ){
             $request_params = array(
-              'user_id' => "{$data->object->from_id}",
+              'peer_id' => "{$data->object->peer_id}",
               'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
               'v' => '5.80'
             );
@@ -85,22 +85,14 @@ $app->post('/bot', function() use($app) {
           );
         $rand = $anekdots[rand(0, count($anekdots)-1)];
         $request_params = array(
-          'user_id' => "{$data->object->from_id}",
+          'peer_id' => "{$data->object->peer_id}",
           'message'=> $rand,
           'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
           'v' => '5.80'
         );
-      } elseif ( $split[0] == "!беседа" ){
+      } else {
         $request_params = array(
           'peer_id' => "{$data->object->peer_id}",
-          'message'=> $split[1],
-          'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
-          'v' => '5.80'
-        );
-      }
-      else {
-        $request_params = array(
-          'user_id' => "{$data->object->from_id}",
           'message'=>'Добро пожаловать! <br> Вот мои команды: <br> ;-P !привет - бот скажет тебе привет😜<br>👏!скажи <фраза/текст> - бот повторит твою фразу👏<br>😎!реши <пример> - бот расскажет смешной анекдот😃',
           'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
           'v' => '5.80'

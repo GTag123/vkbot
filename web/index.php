@@ -77,13 +77,9 @@ $app->post('/bot', function() use($app) {
             $formula = $split[1];
             $precision = 2; // Number of digits after the decimal point
 
-            try {
-              $parser = new FormulaParser($formula, $precision);
-              $result = $parser->getResult(); // [0 => 'done', 1 => 16.38]
-              $request_params['message'] = "🍀Ответ: " . $result[1];
-            } catch (\Exception $e) {
-              $request_params['message'] = "😱Тут я бессилен😱";
-            }
+            $parser = new FormulaParser($formula, $precision);
+            $result = $parser->getResult(); // [0 => 'done', 1 => 16.38]
+            $request_params['message'] = "🍀Ответ: " . number_format($result[1], $precision, '.', ',');
 
       }
       else {

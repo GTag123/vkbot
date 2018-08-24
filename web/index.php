@@ -31,11 +31,19 @@ $app->post('/bot', function() use($app) {
       break;
     
     case 'message_new':
-      if ( $data->object->text == 'Ку' || $data->object->text == 'ку' ){
+      if ( $data->object->text == '!Ку' || $data->object->text == '!ку' || $data->object->text == '!привет' || $data->object->text == '!Привет'){
         $request_params = array(
-          // 'peer_id' => 2000000000 + $data->object->chat_id,
           'user_id' => "{$data->object->from_id}",
-          'message'=>'Привет',
+          'message'=>'привет',
+          'sticker_id' => '51',
+          'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
+          'v' => '5.80'
+        );
+      } else {
+        $request_params = array(
+          'user_id' => "{$data->object->from_id}",
+          'message'=>'Добро пожаловать! \n Вот мои команды: \n !привет - бот скажет тебе привет',
+          'sticker_id' => '51',
           'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
           'v' => '5.80'
         );

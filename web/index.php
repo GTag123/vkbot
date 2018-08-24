@@ -60,10 +60,10 @@ $app->post('/bot', function() use($app) {
           'v' => '5.80'
         );
       } 
-      if ( $data->object->text == '!анекдот' || $data->object->text == '!Анекдот' ){
+      elseif ( $data->object->text == '!анекдот' || $data->object->text == '!Анекдот' ){
         $request_params = array(
           'user_id' => "{$data->object->from_id}",
-          'message'=> $anekdots[rand(0, count($anekdots))],
+          'message'=> $anekdots[rand(0, count($anekdots)-1)],
           'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
           'v' => '5.80'
         );

@@ -87,7 +87,7 @@ $app->post('/bot', function() use($app) {
       }
       
       elseif ( $split[0] == '!бд'){
-        $query = pg_fetch_assoc(pg_query($con, 'SELECT message FROM messages where id = 1;'));
+        $query = pg_fetch_assoc(pg_query($con, 'SELECT * FROM messages;'));
         $request_params['message'] = print_r($query);
       }
       

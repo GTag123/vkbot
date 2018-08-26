@@ -39,19 +39,25 @@ $app->post('/bot', function() use($app) {
       );
       
       $split = explode(" ", $data->object->text, 2);
+
       if ( $split[0] == 'Ку' || $split[0] == 'ку' || $split[0] == '!привет' || $split[0] == '!Привет'){
         $request_params["message"] = '🎉Приветик🎉';
-      } elseif ( $split[0] == "!скажи" ){
+      } 
+      
+      elseif ( $split[0] == "!скажи" ){
           $request_params['message'] = $split[1];
-      } elseif ( $split[0] == '!реши' ){
+      } 
+      
+      elseif ( $split[0] == '!реши' ){
             $formula = $split[1];
             $precision = 2; // Number of digits after the decimal point
 
             $parser = new FormulaParser($formula, $precision);
             $result = $parser->getResult(); // [0 => 'done', 1 => 16.38]
             $request_params['message'] = "🍀Ответ: " . number_format($result[1], $precision, '.', ',');
-
-      } elseif ( $split[0] == '!анекдот' ){
+      } 
+      
+      elseif ( $split[0] == '!анекдот' ){
           $anekdots = array(
             'Колобок повесился😄😄',
             '- Мама, одевай меня быстрее! - Вовочка, куда же ты так торопишься? - Меня в садике ждут друзья! - И что же вы там делаете? - Дерёмся!😄😄',
@@ -78,7 +84,14 @@ $app->post('/bot', function() use($app) {
           $rand = $anekdots[rand(0, count($anekdots)-1)];
           $request_params['message'] = $rand;
           $request_params['attachment'] = 'photo-170236279_456239020';
-      } else {
+      }
+      
+      elseif ( $split[0] == '!бд'){
+        $query = pg_fetch_assoc(pg_query($con, 'SELECT message FROM messages where id = 1;'));
+        $request_params['message'] = "{$query}";
+      }
+      
+      else {
         $request_params['message'] = 'Добро пожаловать!<br> Вот мои команды:<br>;-P !привет - бот скажет тебе привет😜<br>👏!скажи <фраза/текст> - бот повторит твою фразу👏<br>😎!реши <пример> - бот решит пример за тебя😎<br>😃!анекдот - бот расскажет смешной анекдот😃';
       }
 

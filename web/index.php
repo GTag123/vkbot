@@ -45,7 +45,7 @@ $app->post('/bot', function() use($app) {
       } 
 
       elseif ( $split[0] == '!дз' ){
-        $request_params['message'] = print_r($data->object->fwd_messages);
+        $request_params['message'] = $data->object->fwd_messages['message'];
       }
       
       elseif ( $split[0] == '!дз' ){

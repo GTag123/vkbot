@@ -38,11 +38,15 @@ $app->post('/bot', function() use($app) {
         'v' => '5.80'
       );
       
-      $split = explode(" ", $data->object->text, 2);
+      $split = explode(" ", ctext, 2);
 
       if ( $split[0] == 'Ку' || $split[0] == 'ку' || $split[0] == '!привет' || $split[0] == '!Привет'){
         $request_params["message"] = '🎉Приветик🎉';
       } 
+
+      elseif ( $split[0] == '!дз' ){
+        $request_params['message'] = $data->object->fwd_messages[0];
+      }
       
       elseif ( $split[0] == "!скажи" ){
           $request_params['message'] = $split[1];

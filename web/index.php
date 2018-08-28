@@ -74,8 +74,8 @@ $app->post('/bot', function() use($app) {
       }
       
       elseif ( $split[0] == '!бд'){
-        $query = pg_fetch_assoc(pg_query($con, 'SELECT * FROM messages;'));
-        $request_params['message'] = print_r($query);
+        $query = pg_query($con, "INSERT INTO messages (user_id, message) VALUES (22112, 'бот лох');");
+        $request_params['message'] = 'gg';
       }
       elseif ( $split[0] == '!помощь' ) {
         $request_params['message'] = 'Добро пожаловать!<br> Вот мои команды:<br>;-P !привет - бот скажет тебе привет😜<br>👏!скажи <фраза/текст> - бот повторит твою фразу👏<br>😎!реши <пример> - бот решит пример за тебя😎<br>😃!анекдот - бот расскажет смешной анекдот😃';

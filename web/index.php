@@ -47,10 +47,6 @@ $app->post('/bot', function() use($app) {
         $request_params['message'] = $data->object->fwd_messages['id'];
       }
       
-      elseif ( $split[0] == '!дз' ){
-        $request_params['message'] = $data->object->fwd_messages[0];
-      }
-      
       elseif ( $split[0] == "!скажи" ){
           $request_params['message'] = $split[1];
       } 
@@ -68,7 +64,9 @@ $app->post('/bot', function() use($app) {
           $anekdots = array(
             'Колобок повесился',
             'php норм язык',
-            'Вася пошёл кодить на флеш'
+            'Вася пошёл кодить на флеш',
+            'Надел мужик шляпу, а она ему как раз😳😳😳',
+            'Где коммит лебовски?'
             );
           $rand = $anekdots[rand(0, count($anekdots)-1)];
           $request_params['message'] = $rand;

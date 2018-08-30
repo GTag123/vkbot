@@ -29,7 +29,7 @@ $app->post('/bot', function() use($app) {
       return getenv('VK_CONFIRMATION_CODE');
       break;
       
-
+я
     case 'message_new':
       $request_params = array(
         'peer_id' => "{$data->object->peer_id}",

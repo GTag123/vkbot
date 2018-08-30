@@ -13,7 +13,7 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 // Our web handlers
 
 $app->get('/', function() use($app) {
-  return "тагир дебил";
+  header('Location: ./web.php');
 });
 $app->post('/bot', function() use($app) {
   $data = json_decode(file_get_contents('php://input'));

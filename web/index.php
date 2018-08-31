@@ -74,7 +74,7 @@ $app->post('/bot', function() use($app) {
       }
       
       elseif ( $split[0] == '!бд'){
-        $query = pg_query($con, "INSERT INTO messages (user_id, message) VALUES (22112, 'бот лох');");
+        $query = pg_query($con, "INSERT INTO messages (user_id, message) VALUES (22112, 'прив');");
         $request_params['message'] = 'gg';
       }
       elseif ( $split[0] == '!помощь' ) {

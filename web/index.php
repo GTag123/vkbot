@@ -29,7 +29,13 @@ $app->post('/bot', function() use($app) {
       return getenv('VK_CONFIRMATION_CODE');
       break;
       
-
+    case "wall_post_new":
+      $request_params = array(
+        'peer_id' => "239188570",
+        'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
+        'v' => '5.80',
+        'message' => 'Новая запись'
+      );
     case 'message_new':
       $request_params = array(
         'peer_id' => "{$data->object->peer_id}",
@@ -73,10 +79,10 @@ $app->post('/bot', function() use($app) {
           $request_params['attachment'] = 'photo-170236279_456239020';
       }
       
-      elseif ( $split[0] == '!бд'){
+      /* elseif ( $split[0] == '!бд'){
         $query = pg_query($con, "INSERT INTO messages (user_id, message) VALUES (22112, 'прив');");
         $request_params['message'] = 'gg';
-      }
+      } */
       elseif ( $split[0] == '!помощь' ) {
         $request_params['message'] = 'Добро пожаловать!<br> Вот мои команды:<br>;-P !привет - бот скажет тебе привет😜<br>👏!скажи <фраза/текст> - бот повторит твою фразу👏<br>😎!реши <пример> - бот решит пример за тебя😎<br>😃!анекдот - бот расскажет смешной анекдот😃';
       }

@@ -36,6 +36,10 @@ $app->post('/bot', function() use($app) {
         'v' => '5.80',
         'message' => 'Новая запись'
       );
+      file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
+      return 'ok';
+
+      break;
     case 'message_new':
       $request_params = array(
         'peer_id' => "{$data->object->peer_id}",

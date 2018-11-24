@@ -55,7 +55,7 @@ $app->post('/bot', function() use($app) {
       $split = explode(" ", $data->object->text, 2);
 
       if ( $split[0] == 'Ку' || $split[0] == 'ку' || $split[0] == '!привет' || $split[0] == '!Привет'){
-        $request_params["message"] = '🎉Приветик🎉';
+        $request_params["message"] = $lang[1];
       } 
 
       /* elseif ( $split[0] == '!дз' ){
@@ -81,7 +81,7 @@ $app->post('/bot', function() use($app) {
         $request_params['message'] = json_decode(file_get_contents('https://translate.yandex.net/api/v1.5/tr.json/translate?' . http_build_query(array(
           'key' => "trnsl.1.1.20181124T122415Z.1606631df5f130cf.d1a65715f0dd3d20cedfa225a1442f4d7ecc2082",
           'text' => $split2[1],
-          'lang' => 'en-ru'
+          'lang' => $lang[$numberlang]
         ))), true)['text'][0];
     }
 

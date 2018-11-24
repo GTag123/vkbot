@@ -11,7 +11,12 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 ));
 
 // Our web handlers
-
+$lang = array(
+  'ru-en', // 1
+  'en-ru', // 2
+  'fr-ru', // 3
+  'ru-fr' // 4
+)
 $app->get('/', function() use($app) {
 return "тагир дебил";
 });
@@ -71,10 +76,11 @@ $app->post('/bot', function() use($app) {
       }
 
       elseif ( $split[0] == "!перевод" ){
+        $split2 = explode(" ", $split[1], 2);
         $request_params['message'] = json_decode(file_get_contents('https://translate.yandex.net/api/v1.5/tr.json/translate?' . http_build_query(array(
           'key' => "trnsl.1.1.20181124T122415Z.1606631df5f130cf.d1a65715f0dd3d20cedfa225a1442f4d7ecc2082",
-          'text' => $split[1],
-          'lang' => "ru-en"
+          'text' => $split2[1],
+          'lang' => $lang[$split2-1]
         ))), true)['text'][0];
     }
 

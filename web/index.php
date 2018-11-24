@@ -16,6 +16,14 @@ $app->get('/', function() use($app) {
 return "тагир дебил";
 });
 $app->post('/bot', function() use($app) {
+  $lang = array(
+    'ru-en', // 1
+    'en-ru', // 2
+    'fr-ru', // 3
+    'ru-fr', // 4
+    'en-fr', // 5
+    'fr-en', // 6
+  );
   $data = json_decode(file_get_contents('php://input'));
 
   if(!$data)
@@ -71,12 +79,6 @@ $app->post('/bot', function() use($app) {
       }
 
       elseif ( $split[0] == "!перевод" ){
-        $lang = array(
-          'ru-en', // 1
-          'en-ru', // 2
-          'fr-ru', // 3
-          'ru-fr' // 4
-        );
         $split2 = explode(" ", $split[1], 2);
         $numberlang = (int)$split2[0]-1;
         $request_params['message'] = json_decode(file_get_contents('https://translate.yandex.net/api/v1.5/tr.json/translate?' . http_build_query(array(

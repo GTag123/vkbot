@@ -16,7 +16,7 @@ $lang = array(
   'en-ru', // 2
   'fr-ru', // 3
   'ru-fr' // 4
-)
+);
 $app->get('/', function() use($app) {
 return "тагир дебил";
 });

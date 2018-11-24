@@ -80,7 +80,7 @@ $app->post('/bot', function() use($app) {
         $request_params['message'] = json_decode(file_get_contents('https://translate.yandex.net/api/v1.5/tr.json/translate?' . http_build_query(array(
           'key' => "trnsl.1.1.20181124T122415Z.1606631df5f130cf.d1a65715f0dd3d20cedfa225a1442f4d7ecc2082",
           'text' => $split2[1],
-          'lang' => $lang[$split2[0]-1]
+          'lang' => $lang[(int)$split2[0]-1]
         ))), true)['text'][0];
     }
 

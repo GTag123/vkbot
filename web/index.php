@@ -29,7 +29,7 @@ $app->post('/bot', function() use($app) {
       return getenv('VK_CONFIRMATION_CODE');
       break;
       
-    case "wall_post_new":
+ /*   case "wall_post_new":
       $request_params = array(
         'domain' => "gitpush",
         'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
@@ -39,7 +39,7 @@ $app->post('/bot', function() use($app) {
       file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
       return 'ok';
 
-      break;
+      break; */
     case 'message_new':
       $request_params = array(
         'peer_id' => "{$data->object->peer_id}",
@@ -53,13 +53,13 @@ $app->post('/bot', function() use($app) {
         $request_params["message"] = '🎉Приветик🎉';
       } 
 
-      elseif ( $split[0] == '!дз' ){
+      /* elseif ( $split[0] == '!дз' ){
         $request_params['message'] = $data->object->fwd_messages['id'];
-      }
+      } */
       
       elseif ( $split[0] == "!скажи" ){
           $request_params['message'] = $split[1];
-      } 
+      }
       
       elseif ( $split[0] == '!реши' ){
             $formula = $split[1];
@@ -68,8 +68,12 @@ $app->post('/bot', function() use($app) {
             $parser = new FormulaParser($formula, $precision);
             $result = $parser->getResult(); // [0 => 'done', 1 => 16.38]
             $request_params['message'] = "🍀Ответ: " . number_format($result[1], $precision, '.', ',');
-      } 
-      
+      }
+
+      elseif ( $split[0] == "!перевод" ){
+        $request_params['message'] = "ya petux";
+    }
+
       elseif ( $split[0] == '!анекдот' ){
           $anekdots = array(
             'Колобок повесился',

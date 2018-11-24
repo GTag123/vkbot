@@ -96,17 +96,7 @@ $app->post('/bot', function() use($app) {
     }
 
       elseif ( $split[0] == '!анекдот' ){
-          $anekdots = array(
-            'Колобок повесился',
-            'php норм язык',
-            'Вася пошёл кодить на флеш',
-            'Надел мужик шляпу, а она ему как раз😳😳😳',
-            'Где коммит лебовски?'
-            );
-          $rand = $anekdots[rand(0, count($anekdots)-1)];
-          $request_params['message'] = $rand;
-          $request_params['attachment'] = 'photo-170236279_456239020';
-      }
+        $request_params['message'] = json_decode(file_get_contents('http://rzhunemogu.ru/RandJSON.aspx?CType=1'))["content"];
       
       /* elseif ( $split[0] == '!бд'){
         $query = pg_query($con, "INSERT INTO messages (user_id, message) VALUES (22112, 'прив');");

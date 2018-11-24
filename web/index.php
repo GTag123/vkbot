@@ -91,11 +91,11 @@ $app->post('/bot', function() use($app) {
           'key' => "trnsl.1.1.20181124T122415Z.1606631df5f130cf.d1a65715f0dd3d20cedfa225a1442f4d7ecc2082",
           'text' => $split2[1],
           'lang' => $lang[(int)$split2[0]-1]
-        ))), true)['lang'];}
+        ))), true)['text'][0];}
       }
 
       elseif ( $split[0] == '!анекдот' ){
-        $request_params['message'] = json_decode(file_get_contents('http://rzhunemogu.ru/RandJSON.aspx?CType=1'), true)["content"][0];
+        $request_params['message'] = json_decode(file_get_contents('http://rzhunemogu.ru/RandJSON.aspx?CType=1'), true)["content"];
       }
       /* elseif ( $split[0] == '!бд'){
         $query = pg_query($con, "INSERT INTO messages (user_id, message) VALUES (22112, 'прив');");

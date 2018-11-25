@@ -78,9 +78,9 @@ $app->post('/bot', function() use($app) {
         }
         else {
           $lang = array(
-          'ru-en', // 1
-          'en-ru', // 2
-          'fr-ru', // 3
+          'ru', // 1
+          'en', // 2
+          'fr', // 3
           'ru-fr', // 4
           'en-fr', // 5
           'fr-en', // 6
@@ -91,11 +91,11 @@ $app->post('/bot', function() use($app) {
           'key' => "trnsl.1.1.20181124T122415Z.1606631df5f130cf.d1a65715f0dd3d20cedfa225a1442f4d7ecc2082",
           'text' => $split2[1],
           'lang' => $lang[(int)$split2[0]-1]
-        ))), true)['lang'];}
+        ))), true)['text'][0];}
       }
 
       elseif ( $split[0] == '!анекдот' ){
-        $request_params['message'] = json_decode(preg_replace("/[\r\n]+/", " ", file_get_contents('http://rzhunemogu.ru/RandJSON.aspx?CType=1')), true)['content'];
+        $request_params['message'] = json_decode(preg_replace("<br>", " ", file_get_contents('http://rzhunemogu.ru/RandJSON.aspx?CType=1')), true)['content'];
       }
       /* elseif ( $split[0] == '!бд'){
         $query = pg_query($con, "INSERT INTO messages (user_id, message) VALUES (22112, 'прив');");

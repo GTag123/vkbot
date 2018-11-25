@@ -98,9 +98,9 @@ $app->post('/bot', function() use($app) {
       elseif ( $split[0] == "!словарь" ){
         $request_params['message'] = json_decode(file_get_contents('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?' . http_build_query(array(
           'key' => "dict.1.1.20181125T055248Z.a5d95d5f78005a1f.de88c158ee160a6e0188a5879a1ba971da3f05b6",
-          'text' => 'привет',
+          'text' => $split[1],
           'lang' => 'ru-ru'
-        ))), true)['def']['tr']['text'];
+        ))), true)['def'][0]['tr'][0]['text'];
       }
       elseif ( $split[0] == '!анекдот' ){
         $request_params['message'] = json_decode(preg_replace("<br>", " ", file_get_contents('http://rzhunemogu.ru/RandJSON.aspx?CType=1')), true)['content'];

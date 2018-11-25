@@ -74,7 +74,8 @@ $app->post('/bot', function() use($app) {
 
       elseif ( $split[0] == "!перевод" ){
         if ( $split[1] == "" ){
-          $request_params['message'] = "Чтобы перевести текст с какого-то языка пишите:<br>!перевод <id языка> <текст для перевода><br><br>Исходный язык будет определён автоматически<br><br>ID языков:<br>1 - Русский<br>2 - Английский<br>3 - Французский<br>4 - Немецкий<br>5 - Китайский<br>6 - Татаркский<br>7 - Башкирский";
+          $request_params['message'] = "Чтобы перевести текст с какого-то языка пишите:<br>!перевод <id языка> <текст для перевода><br><br>Исходный язык будет определён автоматически<br><br>
+          ID языков:<br>1 - Русский<br>2 - Английский<br>3 - Французский<br>4 - Немецкий<br>5 - Китайский<br>6 - Татарсккий<br>7 - Башкирский";
         }
         else {
           $lang = array(
@@ -94,7 +95,13 @@ $app->post('/bot', function() use($app) {
           'lang' => $lang[(int)$split2[0]-1]
         ))), true)['text'][0];}
       }
-
+      elseif ( $split[0] == "!словарь" ){
+        $request_params['message'] = json_decode(file_get_contents('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?' . http_build_query(array(
+          'key' => "dict.1.1.20181125T055248Z.a5d95d5f78005a1f.de88c158ee160a6e0188a5879a1ba971da3f05b6",
+          'text' => 'привет',
+          'lang' => 'ru-ru'
+        ))), true)['def']['tr']['text'];
+      }
       elseif ( $split[0] == '!анекдот' ){
         $request_params['message'] = json_decode(preg_replace("<br>", " ", file_get_contents('http://rzhunemogu.ru/RandJSON.aspx?CType=1')), true)['content'];
       }

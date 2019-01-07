@@ -54,7 +54,7 @@ $app->post('/bot', function() use($app) {
 
       if ( $split[0] == 'Ку' || $split[0] == 'ку' || $split[0] == '!привет' || $split[0] == '!Привет'){
         $user_info = json_decode(file_get_contents("https://api.vk.com/method/users.get?user_ids={$data->object->peer_id}&access_token={$token}&v=5.80"));
-        $request_params["message"] = "[id{$data->object->peer_id}|{$user_info->response[0]->first_name}" . ', привет!';
+        $request_params["message"] = "[id{$data->object->peer_id}|{$user_info->response[0]->first_name}]" . ', привет!';
       } 
 
       /* elseif ( $split[0] == '!дз' ){

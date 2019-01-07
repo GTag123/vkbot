@@ -12,7 +12,7 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 
 // Our web handlers
 
-
+$token = '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08';
 
 $app->get('/', function() use($app) {
 return "тагир дебил";
@@ -45,14 +45,15 @@ $app->post('/bot', function() use($app) {
     case 'message_new':
       $request_params = array(
         'peer_id' => "{$data->object->peer_id}",
-        'access_token' => '18d28ce6782d1c964c4bac21f4fd054378c65e739089d1bcae856947b32657436f5c2d06faa5179289e08',
+        'access_token' => $token,
         'v' => '5.80'
       );
       
       $split = explode(" ", $data->object->text, 2);
 
       if ( $split[0] == 'Ку' || $split[0] == 'ку' || $split[0] == '!привет' || $split[0] == '!Привет'){
-        $request_params["message"] = '🎉Приветик🎉';
+        $user_info = json_decode(file_get_contents("https://api.vk.com/method/users.get?user_ids={$data->object->peer_id}&access_token={$token}&v=5.80"));
+        $request_params["message"] = $user_info->response[0]->first_name;
       } 
 
       /* elseif ( $split[0] == '!дз' ){
